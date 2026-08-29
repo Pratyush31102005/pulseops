@@ -1,0 +1,378 @@
+import type {
+  Customer,
+  Transaction,
+  Metric,
+  ChartDataPoint,
+  PlanBreakdown,
+  TrafficSource,
+  DailyMetric,
+  ConversionFunnelStep,
+} from "./types";
+
+export const metrics: Metric[] = [
+  {
+    label: "Monthly Revenue",
+    value: "$48,240",
+    change: 12.5,
+    changeLabel: "vs last month",
+    trend: "up",
+  },
+  {
+    label: "Active Customers",
+    value: "2,431",
+    change: 8.2,
+    changeLabel: "vs last month",
+    trend: "up",
+  },
+  {
+    label: "Conversion Rate",
+    value: "7.84%",
+    change: 1.3,
+    changeLabel: "vs last month",
+    trend: "up",
+  },
+  {
+    label: "Churn Rate",
+    value: "2.14%",
+    change: -0.6,
+    changeLabel: "vs last month",
+    trend: "down",
+  },
+];
+
+export const revenueChartData: ChartDataPoint[] = [
+  { date: "Jan", revenue: 32400, previousRevenue: 28100 },
+  { date: "Feb", revenue: 34800, previousRevenue: 29500 },
+  { date: "Mar", revenue: 36200, previousRevenue: 31200 },
+  { date: "Apr", revenue: 38900, previousRevenue: 33800 },
+  { date: "May", revenue: 40100, previousRevenue: 35400 },
+  { date: "Jun", revenue: 41800, previousRevenue: 36900 },
+  { date: "Jul", revenue: 43200, previousRevenue: 38100 },
+  { date: "Aug", revenue: 44600, previousRevenue: 39800 },
+  { date: "Sep", revenue: 45800, previousRevenue: 41200 },
+  { date: "Oct", revenue: 46900, previousRevenue: 42500 },
+  { date: "Nov", revenue: 47800, previousRevenue: 43100 },
+  { date: "Dec", revenue: 48240, previousRevenue: 44000 },
+];
+
+export const planBreakdown: PlanBreakdown[] = [
+  { plan: "Starter", count: 892, revenue: 8920, percentage: 36.7, color: "#6366f1" },
+  { plan: "Pro", count: 984, revenue: 19680, percentage: 40.5, color: "#8b5cf6" },
+  { plan: "Business", count: 412, revenue: 12360, percentage: 16.9, color: "#a78bfa" },
+  { plan: "Enterprise", count: 143, revenue: 7280, percentage: 5.9, color: "#c4b5fd" },
+];
+
+export const trafficSources: TrafficSource[] = [
+  { source: "Organic Search", visitors: 14200, percentage: 42.3, change: 12.4, color: "#22c55e" },
+  { source: "Direct", visitors: 8400, percentage: 25.1, change: 5.8, color: "#6366f1" },
+  { source: "Referral", visitors: 6200, percentage: 18.5, change: -2.1, color: "#f59e0b" },
+  { source: "Paid", visitors: 4700, percentage: 14.1, change: 18.7, color: "#ef4444" },
+];
+
+export const userGrowthData: DailyMetric[] = [
+  { date: "Jan", value: 1820 },
+  { date: "Feb", value: 1950 },
+  { date: "Mar", value: 2080 },
+  { date: "Apr", value: 2180 },
+  { date: "May", value: 2250 },
+  { date: "Jun", value: 2310 },
+  { date: "Jul", value: 2360 },
+  { date: "Aug", value: 2390 },
+  { date: "Sep", value: 2410 },
+  { date: "Oct", value: 2420 },
+  { date: "Nov", value: 2425 },
+  { date: "Dec", value: 2431 },
+];
+
+export const conversionFunnel: ConversionFunnelStep[] = [
+  { step: "Website Visitors", count: 33500, percentage: 100 },
+  { step: "Signups", count: 4820, percentage: 14.4 },
+  { step: "Trial Activations", count: 3240, percentage: 9.7 },
+  { step: "Paid Conversions", count: 1980, percentage: 5.9 },
+  { step: "Retained (90 days)", count: 1640, percentage: 4.9 },
+];
+
+export const retentionData: DailyMetric[] = [
+  { date: "Week 1", value: 100 },
+  { date: "Week 2", value: 84 },
+  { date: "Week 3", value: 76 },
+  { date: "Week 4", value: 71 },
+  { date: "Week 5", value: 68 },
+  { date: "Week 6", value: 66 },
+  { date: "Week 7", value: 64 },
+  { date: "Week 8", value: 63 },
+  { date: "Week 9", value: 62 },
+  { date: "Week 10", value: 61 },
+  { date: "Week 11", value: 60 },
+  { date: "Week 12", value: 60 },
+];
+
+export const customers: Customer[] = [
+  {
+    id: "cus_1",
+    name: "Sarah Chen",
+    email: "sarah.chen@techflow.io",
+    avatar: "SC",
+    plan: "Enterprise",
+    status: "Active",
+    mrr: 499,
+    joined: "2024-03-15",
+    lastActivity: "2025-12-28",
+    company: "TechFlow",
+    payments: [
+      { id: "pay_1a", date: "2025-12-01", amount: 499, status: "Completed" },
+      { id: "pay_1b", date: "2025-11-01", amount: 499, status: "Completed" },
+      { id: "pay_1c", date: "2025-10-01", amount: 499, status: "Completed" },
+    ],
+    activities: [
+      { id: "act_1a", date: "2025-12-28", description: "Downloaded Q4 analytics report", type: "login" },
+      { id: "act_1b", date: "2025-12-22", description: "Upgraded workspace storage", type: "upgrade" },
+      { id: "act_1c", date: "2025-12-15", description: "Payment processed — $499.00", type: "payment" },
+      { id: "act_1d", date: "2025-12-10", description: "Opened support ticket #4821", type: "support" },
+    ],
+  },
+  {
+    id: "cus_2",
+    name: "Marcus Johnson",
+    email: "marcus@scaleup.co",
+    avatar: "MJ",
+    plan: "Business",
+    status: "Active",
+    mrr: 299,
+    joined: "2024-06-22",
+    lastActivity: "2025-12-29",
+    company: "ScaleUp",
+    payments: [
+      { id: "pay_2a", date: "2025-12-01", amount: 299, status: "Completed" },
+      { id: "pay_2b", date: "2025-11-01", amount: 299, status: "Completed" },
+    ],
+    activities: [
+      { id: "act_2a", date: "2025-12-29", description: "Invited 3 new team members", type: "login" },
+      { id: "act_2b", date: "2025-12-20", description: "Payment processed — $299.00", type: "payment" },
+    ],
+  },
+  {
+    id: "cus_3",
+    name: "Elena Rodriguez",
+    email: "elena@designcraft.com",
+    avatar: "ER",
+    plan: "Pro",
+    status: "Active",
+    mrr: 199,
+    joined: "2024-09-03",
+    lastActivity: "2025-12-27",
+    company: "DesignCraft",
+    payments: [
+      { id: "pay_3a", date: "2025-12-01", amount: 199, status: "Completed" },
+      { id: "pay_3b", date: "2025-11-01", amount: 199, status: "Completed" },
+    ],
+    activities: [
+      { id: "act_3a", date: "2025-12-27", description: "Exported monthly analytics", type: "login" },
+      { id: "act_3b", date: "2025-12-18", description: "Payment processed — $199.00", type: "payment" },
+    ],
+  },
+  {
+    id: "cus_4",
+    name: "James Park",
+    email: "j.park@nexgen.dev",
+    avatar: "JP",
+    plan: "Pro",
+    status: "Trial",
+    mrr: 0,
+    joined: "2025-12-15",
+    lastActivity: "2025-12-29",
+    company: "NexGen",
+    payments: [],
+    activities: [
+      { id: "act_4a", date: "2025-12-29", description: "Completed onboarding checklist", type: "subscription" },
+      { id: "act_4b", date: "2025-12-20", description: "Created first dashboard", type: "login" },
+    ],
+  },
+  {
+    id: "cus_5",
+    name: "Aisha Patel",
+    email: "aisha@cloudnine.app",
+    avatar: "AP",
+    plan: "Business",
+    status: "Active",
+    mrr: 299,
+    joined: "2024-01-10",
+    lastActivity: "2025-12-26",
+    company: "CloudNine",
+    payments: [
+      { id: "pay_5a", date: "2025-12-01", amount: 299, status: "Completed" },
+      { id: "pay_5b", date: "2025-11-01", amount: 299, status: "Completed" },
+      { id: "pay_5c", date: "2025-10-01", amount: 299, status: "Completed" },
+    ],
+    activities: [
+      { id: "act_5a", date: "2025-12-26", description: "Reviewed team performance metrics", type: "login" },
+      { id: "act_5b", date: "2025-12-14", description: "Payment processed — $299.00", type: "payment" },
+    ],
+  },
+  {
+    id: "cus_6",
+    name: "David Kim",
+    email: "david@quantumleap.io",
+    avatar: "DK",
+    plan: "Enterprise",
+    status: "Active",
+    mrr: 499,
+    joined: "2023-11-28",
+    lastActivity: "2025-12-29",
+    company: "QuantumLeap",
+    payments: [
+      { id: "pay_6a", date: "2025-12-01", amount: 499, status: "Completed" },
+      { id: "pay_6b", date: "2025-11-01", amount: 499, status: "Completed" },
+    ],
+    activities: [
+      { id: "act_6a", date: "2025-12-29", description: "Configured SSO integration", type: "login" },
+      { id: "act_6b", date: "2025-12-21", description: "Payment processed — $499.00", type: "payment" },
+    ],
+  },
+  {
+    id: "cus_7",
+    name: "Rachel Torres",
+    email: "rachel@brightpath.co",
+    avatar: "RT",
+    plan: "Starter",
+    status: "Churned",
+    mrr: 0,
+    joined: "2024-08-14",
+    lastActivity: "2025-11-15",
+    company: "BrightPath",
+    payments: [
+      { id: "pay_7a", date: "2025-10-01", amount: 99, status: "Completed" },
+      { id: "pay_7b", date: "2025-11-01", amount: 99, status: "Refunded" },
+    ],
+    activities: [
+      { id: "act_7a", date: "2025-11-15", description: "Subscription cancelled", type: "subscription" },
+      { id: "act_7b", date: "2025-11-10", description: "Submitted support request", type: "support" },
+    ],
+  },
+  {
+    id: "cus_8",
+    name: "Tom Williams",
+    email: "tom@velocity.dev",
+    avatar: "TW",
+    plan: "Pro",
+    status: "Active",
+    mrr: 199,
+    joined: "2024-05-20",
+    lastActivity: "2025-12-28",
+    company: "Velocity",
+    payments: [
+      { id: "pay_8a", date: "2025-12-01", amount: 199, status: "Completed" },
+      { id: "pay_8b", date: "2025-11-01", amount: 199, status: "Completed" },
+    ],
+    activities: [
+      { id: "act_8a", date: "2025-12-28", description: "Updated billing information", type: "login" },
+      { id: "act_8b", date: "2025-12-19", description: "Payment processed — $199.00", type: "payment" },
+    ],
+  },
+  {
+    id: "cus_9",
+    name: "Olivia Brown",
+    email: "olivia@stratosphere.com",
+    avatar: "OB",
+    plan: "Starter",
+    status: "Paused",
+    mrr: 0,
+    joined: "2024-10-05",
+    lastActivity: "2025-12-01",
+    company: "Stratosphere",
+    payments: [
+      { id: "pay_9a", date: "2025-11-01", amount: 99, status: "Completed" },
+    ],
+    activities: [
+      { id: "act_9a", date: "2025-12-01", description: "Subscription paused", type: "subscription" },
+    ],
+  },
+  {
+    id: "cus_10",
+    name: "Lucas Martin",
+    email: "lucas@apexsystems.io",
+    avatar: "LM",
+    plan: "Business",
+    status: "Active",
+    mrr: 299,
+    joined: "2024-02-18",
+    lastActivity: "2025-12-27",
+    company: "Apex Systems",
+    payments: [
+      { id: "pay_10a", date: "2025-12-01", amount: 299, status: "Completed" },
+      { id: "pay_10b", date: "2025-11-01", amount: 299, status: "Completed" },
+      { id: "pay_10c", date: "2025-10-01", amount: 299, status: "Completed" },
+    ],
+    activities: [
+      { id: "act_10a", date: "2025-12-27", description: "Reviewed annual usage report", type: "login" },
+      { id: "act_10b", date: "2025-12-16", description: "Payment processed — $299.00", type: "payment" },
+    ],
+  },
+  {
+    id: "cus_11",
+    name: "Nina Zhao",
+    email: "nina@vertexlabs.com",
+    avatar: "NZ",
+    plan: "Pro",
+    status: "Active",
+    mrr: 199,
+    joined: "2024-07-11",
+    lastActivity: "2025-12-29",
+    company: "Vertex Labs",
+    payments: [
+      { id: "pay_11a", date: "2025-12-01", amount: 199, status: "Completed" },
+    ],
+    activities: [
+      { id: "act_11a", date: "2025-12-29", description: "Deployed integration webhook", type: "login" },
+    ],
+  },
+  {
+    id: "cus_12",
+    name: "Kevin O'Brien",
+    email: "kevin@pinnaclegroup.co",
+    avatar: "KO",
+    plan: "Enterprise",
+    status: "Active",
+    mrr: 499,
+    joined: "2023-09-01",
+    lastActivity: "2025-12-28",
+    company: "Pinnacle Group",
+    payments: [
+      { id: "pay_12a", date: "2025-12-01", amount: 499, status: "Completed" },
+    ],
+    activities: [
+      { id: "act_12a", date: "2025-12-28", description: "Exported compliance report", type: "login" },
+      { id: "act_12b", date: "2025-12-17", description: "Payment processed — $499.00", type: "payment" },
+    ],
+  },
+];
+
+export const transactions: Transaction[] = [
+  { id: "txn_001", customerId: "cus_1", customerName: "Sarah Chen", amount: 499, date: "2025-12-01", paymentMethod: "Visa", status: "Completed", description: "Enterprise plan — Monthly" },
+  { id: "txn_002", customerId: "cus_2", customerName: "Marcus Johnson", amount: 299, date: "2025-12-01", paymentMethod: "Mastercard", status: "Completed", description: "Business plan — Monthly" },
+  { id: "txn_003", customerId: "cus_3", customerName: "Elena Rodriguez", amount: 199, date: "2025-12-01", paymentMethod: "Visa", status: "Completed", description: "Pro plan — Monthly" },
+  { id: "txn_004", customerId: "cus_5", customerName: "Aisha Patel", amount: 299, date: "2025-12-01", paymentMethod: "PayPal", status: "Completed", description: "Business plan — Monthly" },
+  { id: "txn_005", customerId: "cus_6", customerName: "David Kim", amount: 499, date: "2025-12-01", paymentMethod: "Bank Transfer", status: "Completed", description: "Enterprise plan — Monthly" },
+  { id: "txn_006", customerId: "cus_8", customerName: "Tom Williams", amount: 199, date: "2025-12-01", paymentMethod: "Visa", status: "Completed", description: "Pro plan — Monthly" },
+  { id: "txn_007", customerId: "cus_10", customerName: "Lucas Martin", amount: 299, date: "2025-12-01", paymentMethod: "Mastercard", status: "Completed", description: "Business plan — Monthly" },
+  { id: "txn_008", customerId: "cus_11", customerName: "Nina Zhao", amount: 199, date: "2025-12-01", paymentMethod: "Visa", status: "Completed", description: "Pro plan — Monthly" },
+  { id: "txn_009", customerId: "cus_12", customerName: "Kevin O'Brien", amount: 499, date: "2025-12-01", paymentMethod: "Amex", status: "Completed", description: "Enterprise plan — Monthly" },
+  { id: "txn_010", customerId: "cus_7", customerName: "Rachel Torres", amount: 99, date: "2025-11-01", paymentMethod: "Visa", status: "Refunded", description: "Starter plan — Refund processed" },
+  { id: "txn_011", customerId: "cus_9", customerName: "Olivia Brown", amount: 99, date: "2025-11-01", paymentMethod: "Mastercard", status: "Pending", description: "Starter plan — Awaiting confirmation" },
+  { id: "txn_012", customerId: "cus_4", customerName: "James Park", amount: 199, date: "2025-12-20", paymentMethod: "Visa", status: "Failed", description: "Pro plan — Card declined" },
+];
+
+export const transactionMetrics = {
+  totalValue: 31840,
+  successful: 28420,
+  refunds: 99,
+  failed: 199,
+};
+
+export const currentUser = {
+  name: "Alex Morgan",
+  email: "alex@pulseops.io",
+  role: "Admin",
+  avatar: "AM",
+  workspace: "PulseOps Inc.",
+};
