@@ -6,7 +6,7 @@ function Skeleton({ className }: { className?: string }) {
 
 export function MetricCardSkeleton() {
   return (
-    <div className="rounded-lg border border-border bg-card p-5">
+    <div className="rounded-2xl border border-border bg-card p-5">
       <Skeleton className="h-3 w-24" />
       <Skeleton className="mt-3 h-7 w-20" />
       <Skeleton className="mt-3 h-4 w-32" />
@@ -16,16 +16,16 @@ export function MetricCardSkeleton() {
 
 export function ChartSkeleton() {
   return (
-    <div className="rounded-lg border border-border bg-card p-5">
+    <div className="rounded-2xl border border-border bg-card p-5">
       <Skeleton className="h-4 w-32" />
-      <Skeleton className="mt-4 h-[250px] w-full rounded-md" />
+      <Skeleton className="mt-4 h-[250px] w-full rounded-xl" />
     </div>
   );
 }
 
 export function TableSkeleton({ rows = 5, cols = 6 }: { rows?: number; cols?: number }) {
   return (
-    <div className="rounded-lg border border-border bg-card">
+    <div className="rounded-2xl border border-border bg-card">
       <div className="border-b border-border p-4">
         <Skeleton className="h-4 w-48" />
       </div>
