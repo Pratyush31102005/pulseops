@@ -24,7 +24,7 @@ function CustomTooltip({ active, payload, label }: { active?: boolean; payload?:
     <motion.div
       initial={{ opacity: 0, y: 4 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-xl border border-border bg-card px-3 py-2 shadow-lg"
+      className="rounded-2xl bg-card px-3 py-2 neu-hover"
     >
       <p className="text-xs font-medium text-muted">{label}</p>
       {payload.map((entry) => (
@@ -48,7 +48,7 @@ export function RevenueChart({ data }: RevenueChartProps) {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.25, duration: 0.3 }}
-      className="rounded-2xl border border-border bg-card p-5"
+      className="rounded-2xl bg-card/80 backdrop-blur-sm p-5 neu-flat"
     >
       <div className="flex items-center justify-between">
         <div>
@@ -69,20 +69,20 @@ export function RevenueChart({ data }: RevenueChartProps) {
           <button
             onClick={() => setZoomLevel(Math.min(zoomLevel + 1, 3))}
             disabled={zoomLevel >= 3}
-            className="rounded-lg p-1.5 text-muted transition-colors duration-150 hover:bg-surface hover:text-foreground disabled:opacity-30 cursor-pointer"
+            className="rounded-full p-1.5 text-muted transition-all duration-150 hover:bg-highlight hover:text-white disabled:opacity-30 cursor-pointer"
           >
             <ZoomIn className="h-3.5 w-3.5" />
           </button>
           <button
             onClick={() => setZoomLevel(Math.max(zoomLevel - 1, 1))}
             disabled={zoomLevel <= 1}
-            className="rounded-lg p-1.5 text-muted transition-colors duration-150 hover:bg-surface hover:text-foreground disabled:opacity-30 cursor-pointer"
+            className="rounded-full p-1.5 text-muted transition-all duration-150 hover:bg-highlight hover:text-white disabled:opacity-30 cursor-pointer"
           >
             <ZoomOut className="h-3.5 w-3.5" />
           </button>
           <button
             onClick={() => setZoomLevel(1)}
-            className="rounded-lg p-1.5 text-muted transition-colors duration-150 hover:bg-surface hover:text-foreground cursor-pointer"
+            className="rounded-full p-1.5 text-muted transition-all duration-150 hover:bg-highlight hover:text-white cursor-pointer"
           >
             <RotateCcw className="h-3.5 w-3.5" />
           </button>
@@ -93,11 +93,11 @@ export function RevenueChart({ data }: RevenueChartProps) {
           <AreaChart data={visibleData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="gradientRevenue" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#D4A843" stopOpacity={0.2} />
-                <stop offset="95%" stopColor="#D4A843" stopOpacity={0} />
+                <stop offset="5%" stopColor="#E8B830" stopOpacity={0.25} />
+                <stop offset="95%" stopColor="#E8B830" stopOpacity={0} />
               </linearGradient>
               <linearGradient id="gradientPrevious" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#2D2D2D" stopOpacity={0.06} />
+                <stop offset="5%" stopColor="#2D2D2D" stopOpacity={0.05} />
                 <stop offset="95%" stopColor="#2D2D2D" stopOpacity={0} />
               </linearGradient>
             </defs>
@@ -120,14 +120,14 @@ export function RevenueChart({ data }: RevenueChartProps) {
               dataKey="previousRevenue"
               stroke="#2D2D2D"
               strokeWidth={1.5}
-              strokeOpacity={0.3}
+              strokeOpacity={0.25}
               strokeDasharray="4 4"
               fill="url(#gradientPrevious)"
             />
             <Area
               type="monotone"
               dataKey="revenue"
-              stroke="#D4A843"
+              stroke="#E8B830"
               strokeWidth={2.5}
               fill="url(#gradientRevenue)"
             />

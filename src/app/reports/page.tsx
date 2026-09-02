@@ -36,7 +36,7 @@ export default function ReportsPage() {
               initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05 + idx * 0.04 }}
-              className="group flex items-center justify-between rounded-2xl border border-border bg-card p-4 transition-all duration-150 hover:shadow-md cursor-pointer"
+              className="group flex items-center justify-between rounded-2xl bg-card/80 backdrop-blur-sm p-4 neu-flat transition-all duration-300 hover:neu-hover cursor-pointer"
             >
               <div>
                 <h3 className="text-sm font-medium text-foreground">{report.name}</h3>

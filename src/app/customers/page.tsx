@@ -85,7 +85,7 @@ export default function CustomersPage() {
           transition={{ delay: 0.1, duration: 0.25 }}
           className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center"
         >
-          <SearchInput value={search} onChange={setSearch} placeholder="Search customers..." className="w-full sm:w-64" />
+          <SearchInput value={search} onChange={(v) => setSearch(v as unknown as string)} placeholder="Search customers..." className="w-full sm:w-64" />
           <FilterDropdown label="Plan" options={plans} value={planFilter} onChange={(v) => { setPlanFilter(v); setPage(1); }} />
           <FilterDropdown label="Status" options={statuses} value={statusFilter} onChange={(v) => { setStatusFilter(v); setPage(1); }} />
         </motion.div>
@@ -99,10 +99,10 @@ export default function CustomersPage() {
           />
         ) : (
           <>
-            <div className="mt-4 overflow-x-auto rounded-2xl border border-border bg-card">
+            <div className="mt-4 overflow-x-auto rounded-2xl bg-card/80 backdrop-blur-sm neu-flat">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-border">
+                  <tr className="border-b border-border/50">
                     <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted group cursor-pointer hover:text-foreground transition-colors" onClick={() => handleSort("name")}>
                       <span className="flex items-center gap-1.5">Customer <SortIcon field="name" /></span>
                     </th>
@@ -128,7 +128,7 @@ export default function CustomersPage() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -4 }}
                         transition={{ delay: idx * 0.025, duration: 0.2 }}
-                        className="border-b border-border last:border-0 transition-colors duration-150 hover:bg-surface cursor-pointer"
+                        className="border-b border-border/30 last:border-0 transition-colors duration-150 hover:bg-surface/50 cursor-pointer"
                         onClick={() => openDrawer(customer)}
                       >
                         <td className="px-4 py-3">
@@ -151,12 +151,12 @@ export default function CustomersPage() {
                           <div className="relative inline-block">
                             <button
                               onClick={(e) => { e.stopPropagation(); setMenuOpen(menuOpen === customer.id ? null : customer.id); }}
-                              className="rounded-full p-1 text-muted transition-colors duration-150 hover:bg-surface hover:text-foreground cursor-pointer"
+                              className="rounded-full p-1 text-muted transition-colors duration-150 hover:bg-highlight hover:text-white cursor-pointer"
                             >
                               <MoreHorizontal className="h-4 w-4" />
                             </button>
                             {menuOpen === customer.id && (
-                              <div className="absolute right-0 top-full z-20 mt-1 w-36 rounded-xl border border-border bg-card py-1 shadow-lg">
+                              <div className="absolute right-0 top-full z-20 mt-1 w-36 rounded-xl bg-card py-1 neu-float">
                                 <button onClick={(e) => { e.stopPropagation(); openDrawer(customer); }} className="w-full px-3 py-1.5 text-left text-sm text-foreground hover:bg-surface transition-colors cursor-pointer">View details</button>
                                 <button onClick={(e) => { e.stopPropagation(); setMenuOpen(null); showToast("Customer edited"); }} className="w-full px-3 py-1.5 text-left text-sm text-foreground hover:bg-surface transition-colors cursor-pointer">Edit</button>
                                 <button onClick={(e) => { e.stopPropagation(); setDeleteModal(customer); setMenuOpen(null); }} className="w-full px-3 py-1.5 text-left text-sm text-error hover:bg-surface transition-colors cursor-pointer">Remove</button>

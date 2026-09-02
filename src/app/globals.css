@@ -2,22 +2,22 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #F8F4EB;
+  --color-background: #F5F0E6;
   --color-foreground: #1A1A1A;
-  --color-card: #FFFFFF;
-  --color-card-hover: #FDF9F3;
+  --color-card: #FAF7F0;
+  --color-card-hover: #FFF9EE;
   --color-border: #E8E0D0;
   --color-border-light: #D8CFC0;
   --color-muted: #8A8070;
   --color-muted-foreground: #A09888;
-  --color-accent: #D4A843;
-  --color-accent-hover: #C49A38;
+  --color-accent: #E8B830;
+  --color-accent-hover: #D4A843;
   --color-highlight: #2D2D2D;
   --color-highlight-hover: #3D3D3D;
   --color-success: #4CAF50;
   --color-warning: #E8C840;
   --color-error: #E05050;
-  --color-surface: #F0EBE0;
+  --color-surface: #EDE8DC;
   --color-primary: #2D2D2D;
   --color-primary-light: #4A4A4A;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
@@ -35,13 +35,15 @@
 *::-webkit-scrollbar-thumb:hover { background: #C0B8A8; }
 
 body {
-  background: var(--color-background);
+  background: linear-gradient(160deg, #F5F0E6 0%, #FFF8E7 35%, #F0EBE0 70%, #EDE8DC 100%);
+  background-attachment: fixed;
   color: var(--color-foreground);
   font-family: var(--font-sans);
+  min-height: 100vh;
 }
 
 ::selection {
-  background: rgba(212, 168, 67, 0.25);
+  background: rgba(232, 184, 48, 0.25);
   color: #1A1A1A;
 }
 
@@ -52,3 +54,28 @@ input[type="search"]::-webkit-search-cancel-button { display: none; }
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-in-up { animation: fadeInUp 0.35s ease-out forwards; }
+
+/* Neumorphic utility classes */
+.neu-flat {
+  box-shadow:
+    6px 6px 14px rgba(174, 160, 130, 0.18),
+    -6px -6px 14px rgba(255, 255, 255, 0.7);
+}
+
+.neu-hover {
+  box-shadow:
+    8px 8px 20px rgba(174, 160, 130, 0.22),
+    -8px -8px 20px rgba(255, 255, 255, 0.75);
+}
+
+.neu-inset {
+  box-shadow:
+    inset 3px 3px 6px rgba(174, 160, 130, 0.18),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.6);
+}
+
+.neu-float {
+  box-shadow:
+    10px 10px 24px rgba(174, 160, 130, 0.2),
+    -10px -10px 24px rgba(255, 255, 255, 0.75);
+}

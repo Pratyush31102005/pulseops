@@ -58,7 +58,7 @@ export function MetricCard({ metric, index }: MetricCardProps) {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.06, duration: 0.3, ease: "easeOut" }}
-      className="group relative rounded-2xl bg-card p-5 border border-border transition-all duration-150 hover:shadow-md cursor-default"
+      className="group relative rounded-2xl bg-card/80 backdrop-blur-sm p-5 neu-flat transition-all duration-300 hover:neu-hover cursor-default"
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
     >
@@ -67,7 +67,7 @@ export function MetricCard({ metric, index }: MetricCardProps) {
         <div className="relative">
           <Info className="h-3.5 w-3.5 text-muted/40 transition-colors duration-150 group-hover:text-muted" />
           {showTooltip && (
-            <div className="absolute right-0 top-full z-10 mt-1.5 w-48 rounded-xl border border-border bg-card px-3 py-2 shadow-lg">
+            <div className="absolute right-0 top-full z-10 mt-1.5 w-48 rounded-2xl bg-card px-3 py-2 neu-hover">
               <p className="text-xs text-foreground">{metric.changeLabel}</p>
               <p className="mt-0.5 text-xs text-muted">
                 {isPositive || isNegativeGood ? "Trending upward" : "Trending downward"} over the selected period.
@@ -78,7 +78,7 @@ export function MetricCard({ metric, index }: MetricCardProps) {
       </div>
 
       <div className="mt-3 flex items-end justify-between">
-        <p className="text-3xl font-bold tracking-tight text-foreground">{metric.value}</p>
+        <p className="text-4xl font-light tracking-tight text-foreground">{metric.value}</p>
         <MiniSparkline data={sparkData} color={sparkColor} />
       </div>
 

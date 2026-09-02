@@ -10,7 +10,7 @@ interface RevenueByPlanProps {
 
 const planColors: Record<string, string> = {
   Starter: "#8A8070",
-  Pro: "#D4A843",
+  Pro: "#E8B830",
   Business: "#2D2D2D",
   Enterprise: "#4CAF50",
 };
@@ -23,12 +23,12 @@ export function RevenueByPlan({ data }: RevenueByPlanProps) {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.35, duration: 0.3 }}
-      className="rounded-2xl border border-border bg-card p-5"
+      className="rounded-2xl bg-card/80 backdrop-blur-sm p-5 neu-flat"
     >
       <h3 className="text-sm font-semibold text-foreground">Revenue by Plan</h3>
       <div className="mt-4 space-y-4">
         {data.map((plan, idx) => {
-          const color = planColors[plan.plan] || "#D4A843";
+          const color = planColors[plan.plan] || "#E8B830";
           return (
             <motion.div
               key={plan.plan}
@@ -44,7 +44,7 @@ export function RevenueByPlan({ data }: RevenueByPlanProps) {
                 </div>
                 <span className="font-medium text-foreground">{formatCurrency(plan.revenue)}</span>
               </div>
-              <div className="mt-2 h-2 overflow-hidden rounded-full bg-surface">
+              <div className="mt-2 h-2.5 overflow-hidden rounded-full neu-inset">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${(plan.revenue / maxRevenue) * 100}%` }}

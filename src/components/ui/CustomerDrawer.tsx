@@ -25,7 +25,7 @@ export function CustomerDrawer({ customer, open, onClose }: CustomerDrawerProps)
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/15 backdrop-blur-md"
             onClick={onClose}
           />
           <motion.div
@@ -33,18 +33,18 @@ export function CustomerDrawer({ customer, open, onClose }: CustomerDrawerProps)
             animate={{ x: 0 }}
             exit={{ x: 420 }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="relative h-full w-full max-w-md overflow-y-auto border-l border-border bg-background"
+            className="relative h-full w-full max-w-md overflow-y-auto bg-background/95 backdrop-blur-xl"
           >
-            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-border bg-background/95 backdrop-blur-sm px-6 py-4">
+            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-border/30 bg-background/95 backdrop-blur-sm px-6 py-4">
               <h2 className="text-sm font-semibold text-foreground">Customer Details</h2>
-              <button onClick={onClose} className="rounded-full p-1 text-muted transition-colors duration-150 hover:bg-surface hover:text-foreground cursor-pointer">
+              <button onClick={onClose} className="rounded-full p-1 text-muted transition-colors duration-150 hover:bg-highlight hover:text-white cursor-pointer">
                 <X className="h-4 w-4" />
               </button>
             </div>
 
             <div className="p-6">
               <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-highlight text-sm font-bold text-white">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-highlight text-sm font-bold text-white shadow-md">
                   {customer.avatar}
                 </div>
                 <div>
@@ -54,19 +54,19 @@ export function CustomerDrawer({ customer, open, onClose }: CustomerDrawerProps)
               </div>
 
               <div className="mt-6 grid grid-cols-2 gap-3">
-                <div className="rounded-xl border border-border bg-card p-3">
+                <div className="rounded-xl bg-surface/50 p-3 neu-flat">
                   <p className="text-xs text-muted uppercase tracking-wider">Plan</p>
                   <p className="mt-1 text-sm font-medium text-foreground">{customer.plan}</p>
                 </div>
-                <div className="rounded-xl border border-border bg-card p-3">
+                <div className="rounded-xl bg-surface/50 p-3 neu-flat">
                   <p className="text-xs text-muted uppercase tracking-wider">Status</p>
                   <div className="mt-1"><StatusBadge status={customer.status} /></div>
                 </div>
-                <div className="rounded-xl border border-border bg-card p-3">
+                <div className="rounded-xl bg-surface/50 p-3 neu-flat">
                   <p className="text-xs text-muted uppercase tracking-wider">MRR</p>
                   <p className="mt-1 text-sm font-medium text-foreground">{customer.mrr > 0 ? formatCurrency(customer.mrr) : "—"}</p>
                 </div>
-                <div className="rounded-xl border border-border bg-card p-3">
+                <div className="rounded-xl bg-surface/50 p-3 neu-flat">
                   <p className="text-xs text-muted uppercase tracking-wider">Joined</p>
                   <p className="mt-1 text-sm font-medium text-foreground">{formatDate(customer.joined)}</p>
                 </div>
@@ -104,7 +104,7 @@ export function CustomerDrawer({ customer, open, onClose }: CustomerDrawerProps)
                   </div>
                   <div className="mt-2 space-y-2">
                     {customer.payments.map((payment) => (
-                      <div key={payment.id} className="flex items-center justify-between rounded-xl border border-border bg-card px-3 py-2 transition-colors duration-150 hover:border-border-light">
+                      <div key={payment.id} className="flex items-center justify-between rounded-xl bg-surface/50 px-3 py-2 neu-flat transition-colors duration-150 hover:bg-surface/70">
                         <div>
                           <p className="text-sm font-medium text-foreground">{formatCurrency(payment.amount)}</p>
                           <p className="text-xs text-muted">{formatDate(payment.date)}</p>
@@ -125,7 +125,7 @@ export function CustomerDrawer({ customer, open, onClose }: CustomerDrawerProps)
                     {customer.activities.map((activity, idx) => (
                       <div key={activity.id} className="relative flex gap-3 pb-4">
                         {idx < customer.activities.length - 1 && (
-                          <div className="absolute left-[7px] top-4 h-full w-px bg-border" />
+                          <div className="absolute left-[7px] top-4 h-full w-px bg-border/50" />
                         )}
                         <div className="relative mt-1 h-[15px] w-[15px] shrink-0 rounded-full border-2 border-accent/30 bg-background" />
                         <div>

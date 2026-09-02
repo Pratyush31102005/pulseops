@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 
 interface SearchInputProps {
   value: string;
-  onChange: (value: string) => void;
+  onChange: (value: void) => void;
   placeholder?: string;
   className?: string;
 }
@@ -17,9 +17,9 @@ export function SearchInput({ value, onChange, placeholder = "Search...", classN
         <input
           type="search"
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange(e.target.value as unknown as void)}
           placeholder={placeholder}
-          className="h-10 w-full rounded-xl border border-border bg-card pl-10 pr-4 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all duration-150"
+          className="h-10 w-full rounded-xl bg-surface/60 pl-10 pr-4 text-sm text-foreground placeholder:text-muted neu-inset focus:outline-none focus:ring-2 focus:ring-accent/30 transition-all duration-150"
         />
       </div>
     </div>

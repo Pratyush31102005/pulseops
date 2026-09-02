@@ -55,7 +55,7 @@ export default function TransactionsPage() {
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05 + i * 0.05 }}
-              className="rounded-2xl border border-border bg-card p-4 transition-all duration-150 hover:shadow-md"
+              className="rounded-2xl bg-card/80 backdrop-blur-sm p-4 neu-flat transition-all duration-300 hover:neu-hover"
             >
               <div className="flex items-center gap-2">
                 <div className={cn("flex h-8 w-8 items-center justify-center rounded-xl", card.bg)}>
@@ -74,15 +74,15 @@ export default function TransactionsPage() {
           transition={{ delay: 0.2 }}
           className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center"
         >
-          <SearchInput value={search} onChange={setSearch} placeholder="Search transactions..." className="w-full sm:w-64" />
+          <SearchInput value={search} onChange={(v) => setSearch(v as unknown as string)} placeholder="Search transactions..." className="w-full sm:w-64" />
           <FilterDropdown label="Status" options={statusFilters} value={statusFilter} onChange={setStatusFilter} />
           <FilterDropdown label="Method" options={methodFilters} value={methodFilter} onChange={setMethodFilter} />
         </motion.div>
 
-        <div className="mt-4 overflow-x-auto rounded-2xl border border-border bg-card">
+        <div className="mt-4 overflow-x-auto rounded-2xl bg-card/80 backdrop-blur-sm neu-flat">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-border">
+              <tr className="border-b border-border/50">
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted">ID</th>
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted">Customer</th>
                 <th className="hidden px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted sm:table-cell">Amount</th>
@@ -101,7 +101,7 @@ export default function TransactionsPage() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -4 }}
                     transition={{ delay: idx * 0.02, duration: 0.2 }}
-                    className="border-b border-border last:border-0 transition-colors duration-150 hover:bg-surface"
+                    className="border-b border-border/30 last:border-0 transition-colors duration-150 hover:bg-surface/50"
                   >
                     <td className="px-4 py-3 text-sm text-muted font-mono text-xs">{txn.id}</td>
                     <td className="px-4 py-3 text-sm text-foreground">{txn.customerName}</td>

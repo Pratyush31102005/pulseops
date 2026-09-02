@@ -34,15 +34,15 @@ export default function OverviewPage() {
               Here&apos;s what&apos;s happening with your business today.
             </p>
           </div>
-          <div className="flex items-center gap-0.5 rounded-full border border-border bg-card p-0.5">
+          <div className="flex items-center gap-0.5 rounded-full bg-surface/50 p-1 neu-flat">
             {dateRanges.map((range) => (
               <button
                 key={range}
                 onClick={() => setActiveRange(range)}
                 className={cn(
-                  "rounded-full px-4 py-1.5 text-xs font-medium transition-all duration-150 cursor-pointer",
+                  "rounded-full px-4 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer",
                   activeRange === range
-                    ? "bg-highlight text-white shadow-sm"
+                    ? "bg-highlight text-white shadow-md"
                     : "text-muted hover:text-foreground"
                 )}
               >

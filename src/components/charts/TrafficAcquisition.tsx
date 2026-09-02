@@ -11,7 +11,7 @@ interface TrafficAcquisitionProps {
 
 const sourceColors: Record<string, string> = {
   "Organic Search": "#4CAF50",
-  "Direct": "#D4A843",
+  "Direct": "#E8B830",
   "Referral": "#E8C840",
   "Paid": "#2D2D2D",
 };
@@ -22,12 +22,12 @@ export function TrafficAcquisition({ data }: TrafficAcquisitionProps) {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4, duration: 0.3 }}
-      className="rounded-2xl border border-border bg-card p-5"
+      className="rounded-2xl bg-card/80 backdrop-blur-sm p-5 neu-flat"
     >
       <h3 className="text-sm font-semibold text-foreground">Traffic / Acquisition</h3>
       <div className="mt-4 space-y-3">
         {data.map((source, idx) => {
-          const color = sourceColors[source.source] || "#D4A843";
+          const color = sourceColors[source.source] || "#E8B830";
           return (
             <motion.div
               key={source.source}
