@@ -22,7 +22,7 @@ function MiniSparkline({ data, color }: { data: number[]; color: string }) {
   const max = Math.max(...data);
   const min = Math.min(...data);
   const range = max - min || 1;
-  const width = 80;
+  const width = 72;
   const height = 24;
   const points = data
     .map((v, i) => {
@@ -38,7 +38,7 @@ function MiniSparkline({ data, color }: { data: number[]; color: string }) {
         points={points}
         fill="none"
         stroke={color}
-        strokeWidth="1.5"
+        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -50,7 +50,7 @@ export function MetricCard({ metric, index }: MetricCardProps) {
   const [showTooltip, setShowTooltip] = useState(false);
   const isPositive = metric.trend === "up";
   const isNegativeGood = metric.label === "Churn Rate" && metric.trend === "down";
-  const sparkColor = isPositive || isNegativeGood ? "#10B981" : "#EF4444";
+  const sparkColor = isPositive || isNegativeGood ? "#4CAF50" : "#E05050";
   const sparkData = miniSparklines[metric.label] || [30, 40, 35, 50, 45, 55, 50, 60, 55, 65, 60, 70];
 
   return (
@@ -58,16 +58,16 @@ export function MetricCard({ metric, index }: MetricCardProps) {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.06, duration: 0.3, ease: "easeOut" }}
-      className="group relative rounded-lg border border-border bg-card p-4 transition-all duration-150 hover:border-border-light metric-glow cursor-default"
+      className="group relative rounded-2xl bg-card p-5 border border-border transition-all duration-150 hover:shadow-md cursor-default"
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
     >
       <div className="flex items-start justify-between">
         <p className="text-xs font-medium uppercase tracking-wider text-muted">{metric.label}</p>
         <div className="relative">
-          <Info className="h-3.5 w-3.5 text-muted/50 transition-colors duration-150 group-hover:text-muted" />
+          <Info className="h-3.5 w-3.5 text-muted/40 transition-colors duration-150 group-hover:text-muted" />
           {showTooltip && (
-            <div className="absolute right-0 top-full z-10 mt-1.5 w-48 rounded-md border border-border bg-card px-3 py-2 shadow-lg">
+            <div className="absolute right-0 top-full z-10 mt-1.5 w-48 rounded-xl border border-border bg-card px-3 py-2 shadow-lg">
               <p className="text-xs text-foreground">{metric.changeLabel}</p>
               <p className="mt-0.5 text-xs text-muted">
                 {isPositive || isNegativeGood ? "Trending upward" : "Trending downward"} over the selected period.
@@ -77,15 +77,15 @@ export function MetricCard({ metric, index }: MetricCardProps) {
         </div>
       </div>
 
-      <div className="mt-2 flex items-end justify-between">
-        <p className="text-2xl font-bold tracking-tight text-foreground font-mono">{metric.value}</p>
+      <div className="mt-3 flex items-end justify-between">
+        <p className="text-3xl font-bold tracking-tight text-foreground">{metric.value}</p>
         <MiniSparkline data={sparkData} color={sparkColor} />
       </div>
 
-      <div className="mt-2 flex items-center gap-1.5">
+      <div className="mt-3 flex items-center gap-1.5">
         <span
           className={cn(
-            "inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-xs font-medium",
+            "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium",
             isPositive || isNegativeGood
               ? "bg-success/10 text-success"
               : "bg-error/10 text-error"

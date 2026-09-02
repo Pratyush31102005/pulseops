@@ -73,9 +73,9 @@ export default function CustomersPage() {
   return (
     <DashboardShell>
       <ToastContainer />
-      <div className="mx-auto max-w-7xl">
+      <div>
         <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-          <h1 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">Customers</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Customers</h1>
           <p className="mt-1 text-sm text-muted">Manage your customer base and subscriptions.</p>
         </motion.div>
 
@@ -99,10 +99,10 @@ export default function CustomersPage() {
           />
         ) : (
           <>
-            <div className="mt-4 overflow-x-auto rounded-lg border border-border">
+            <div className="mt-4 overflow-x-auto rounded-2xl border border-border bg-card">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-border bg-card">
+                  <tr className="border-b border-border">
                     <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted group cursor-pointer hover:text-foreground transition-colors" onClick={() => handleSort("name")}>
                       <span className="flex items-center gap-1.5">Customer <SortIcon field="name" /></span>
                     </th>
@@ -128,12 +128,12 @@ export default function CustomersPage() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -4 }}
                         transition={{ delay: idx * 0.025, duration: 0.2 }}
-                        className="border-b border-border row-highlight cursor-pointer"
+                        className="border-b border-border last:border-0 transition-colors duration-150 hover:bg-surface cursor-pointer"
                         onClick={() => openDrawer(customer)}
                       >
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-3">
-                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary-light">
+                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-highlight text-xs font-semibold text-white">
                               {customer.avatar}
                             </div>
                             <div>
@@ -142,24 +142,24 @@ export default function CustomersPage() {
                             </div>
                           </div>
                         </td>
-                        <td className="hidden px-4 py-3 text-sm text-muted md:table-cell font-mono text-xs">{customer.email}</td>
+                        <td className="hidden px-4 py-3 text-sm text-muted md:table-cell">{customer.email}</td>
                         <td className="px-4 py-3 text-sm text-foreground">{customer.plan}</td>
                         <td className="px-4 py-3"><StatusBadge status={customer.status} /></td>
-                        <td className="hidden px-4 py-3 text-sm font-medium text-foreground font-mono sm:table-cell">{customer.mrr > 0 ? formatCurrency(customer.mrr) : "—"}</td>
+                        <td className="hidden px-4 py-3 text-sm font-medium text-foreground sm:table-cell">{customer.mrr > 0 ? formatCurrency(customer.mrr) : "—"}</td>
                         <td className="hidden px-4 py-3 text-sm text-muted lg:table-cell">{formatDate(customer.joined)}</td>
                         <td className="px-4 py-3 text-right">
                           <div className="relative inline-block">
                             <button
                               onClick={(e) => { e.stopPropagation(); setMenuOpen(menuOpen === customer.id ? null : customer.id); }}
-                              className="rounded p-1 text-muted transition-colors duration-150 hover:bg-card-hover hover:text-foreground cursor-pointer"
+                              className="rounded-full p-1 text-muted transition-colors duration-150 hover:bg-surface hover:text-foreground cursor-pointer"
                             >
                               <MoreHorizontal className="h-4 w-4" />
                             </button>
                             {menuOpen === customer.id && (
-                              <div className="absolute right-0 top-full z-20 mt-1 w-36 rounded-md border border-border bg-card py-1 shadow-lg">
-                                <button onClick={(e) => { e.stopPropagation(); openDrawer(customer); }} className="w-full px-3 py-1.5 text-left text-sm text-foreground hover:bg-card-hover transition-colors cursor-pointer">View details</button>
-                                <button onClick={(e) => { e.stopPropagation(); setMenuOpen(null); showToast("Customer edited"); }} className="w-full px-3 py-1.5 text-left text-sm text-foreground hover:bg-card-hover transition-colors cursor-pointer">Edit</button>
-                                <button onClick={(e) => { e.stopPropagation(); setDeleteModal(customer); setMenuOpen(null); }} className="w-full px-3 py-1.5 text-left text-sm text-error hover:bg-card-hover transition-colors cursor-pointer">Remove</button>
+                              <div className="absolute right-0 top-full z-20 mt-1 w-36 rounded-xl border border-border bg-card py-1 shadow-lg">
+                                <button onClick={(e) => { e.stopPropagation(); openDrawer(customer); }} className="w-full px-3 py-1.5 text-left text-sm text-foreground hover:bg-surface transition-colors cursor-pointer">View details</button>
+                                <button onClick={(e) => { e.stopPropagation(); setMenuOpen(null); showToast("Customer edited"); }} className="w-full px-3 py-1.5 text-left text-sm text-foreground hover:bg-surface transition-colors cursor-pointer">Edit</button>
+                                <button onClick={(e) => { e.stopPropagation(); setDeleteModal(customer); setMenuOpen(null); }} className="w-full px-3 py-1.5 text-left text-sm text-error hover:bg-surface transition-colors cursor-pointer">Remove</button>
                               </div>
                             )}
                           </div>
@@ -172,14 +172,14 @@ export default function CustomersPage() {
             </div>
 
             <div className="mt-4 flex items-center justify-between">
-              <p className="text-sm text-muted font-mono text-xs">
+              <p className="text-sm text-muted">
                 {(page - 1) * ITEMS_PER_PAGE + 1}–{Math.min(page * ITEMS_PER_PAGE, filtered.length)} of {filtered.length}
               </p>
               <div className="flex items-center gap-2">
                 <Button variant="secondary" size="sm" disabled={page <= 1} onClick={() => setPage(page - 1)}>
                   <ChevronLeft className="h-3.5 w-3.5" />
                 </Button>
-                <span className="text-sm text-muted font-mono text-xs">{page} / {totalPages}</span>
+                <span className="text-sm text-muted">{page} / {totalPages}</span>
                 <Button variant="secondary" size="sm" disabled={page >= totalPages} onClick={() => setPage(page + 1)}>
                   <ChevronRight className="h-3.5 w-3.5" />
                 </Button>

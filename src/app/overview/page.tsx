@@ -19,7 +19,7 @@ export default function OverviewPage() {
   return (
     <DashboardShell>
       <ToastContainer />
-      <div className="mx-auto max-w-7xl">
+      <div>
         <motion.div
           initial={{ opacity: 0, y: -6 }}
           animate={{ opacity: 1, y: 0 }}
@@ -27,23 +27,23 @@ export default function OverviewPage() {
           className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"
         >
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+            <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
               Good morning, Alex
             </h1>
             <p className="mt-1 text-sm text-muted">
               Here&apos;s what&apos;s happening with your business today.
             </p>
           </div>
-          <div className="flex items-center gap-0.5 rounded-lg border border-border bg-card p-0.5">
+          <div className="flex items-center gap-0.5 rounded-full border border-border bg-card p-0.5">
             {dateRanges.map((range) => (
               <button
                 key={range}
                 onClick={() => setActiveRange(range)}
                 className={cn(
-                  "rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-150 cursor-pointer",
+                  "rounded-full px-4 py-1.5 text-xs font-medium transition-all duration-150 cursor-pointer",
                   activeRange === range
-                    ? "bg-accent text-white shadow-sm"
-                    : "text-muted-foreground hover:text-foreground hover:bg-card-hover"
+                    ? "bg-highlight text-white shadow-sm"
+                    : "text-muted hover:text-foreground"
                 )}
               >
                 {range}

@@ -22,9 +22,9 @@ export default function SettingsPage() {
   return (
     <DashboardShell>
       <ToastContainer />
-      <div className="mx-auto max-w-4xl">
+      <div>
         <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-          <h1 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">Settings</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Settings</h1>
           <p className="mt-1 text-sm text-muted">Manage your account and workspace preferences.</p>
         </motion.div>
 
@@ -36,8 +36,8 @@ export default function SettingsPage() {
               className={cn(
                 "whitespace-nowrap border-b-2 px-4 py-2.5 text-sm font-medium transition-all duration-150 cursor-pointer",
                 activeTab === tab
-                  ? "border-accent text-accent"
-                  : "border-transparent text-muted-foreground hover:text-foreground hover:border-border-light"
+                  ? "border-accent text-foreground"
+                  : "border-transparent text-muted hover:text-foreground hover:border-border-light"
               )}
             >
               {tab}
@@ -54,24 +54,24 @@ export default function SettingsPage() {
         >
           {activeTab === "Profile" && (
             <>
-              <div className="rounded-lg border border-border bg-card p-5">
+              <div className="rounded-2xl border border-border bg-card p-5">
                 <h3 className="text-sm font-semibold text-foreground">Personal Information</h3>
                 <div className="mt-4 grid gap-4 sm:grid-cols-2">
                   <div>
                     <label className="block text-xs font-medium text-muted">Full name</label>
-                    <input defaultValue="Alex Morgan" className="mt-1 h-9 w-full rounded-md border border-border bg-surface px-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/30 transition-colors duration-150" />
+                    <input defaultValue="Alex Morgan" className="mt-1 h-10 w-full rounded-xl border border-border bg-background px-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all duration-150" />
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-muted">Email</label>
-                    <input defaultValue="alex@pulseops.io" type="email" className="mt-1 h-9 w-full rounded-md border border-border bg-surface px-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/30 transition-colors duration-150" />
+                    <input defaultValue="alex@pulseops.io" type="email" className="mt-1 h-10 w-full rounded-xl border border-border bg-background px-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all duration-150" />
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-muted">Role</label>
-                    <input defaultValue="Admin" disabled className="mt-1 h-9 w-full rounded-md border border-border bg-surface px-3 text-sm text-muted cursor-not-allowed" />
+                    <input defaultValue="Admin" disabled className="mt-1 h-10 w-full rounded-xl border border-border bg-surface px-3 text-sm text-muted cursor-not-allowed" />
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-muted">Timezone</label>
-                    <select className="mt-1 h-9 w-full rounded-md border border-border bg-surface px-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/30 transition-colors duration-150 cursor-pointer">
+                    <select className="mt-1 h-10 w-full rounded-xl border border-border bg-background px-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all duration-150 cursor-pointer">
                       <option>UTC-05:00 Eastern Time</option>
                       <option>UTC-06:00 Central Time</option>
                       <option>UTC-07:00 Mountain Time</option>
@@ -91,16 +91,16 @@ export default function SettingsPage() {
 
           {activeTab === "Workspace" && (
             <>
-              <div className="rounded-lg border border-border bg-card p-5">
+              <div className="rounded-2xl border border-border bg-card p-5">
                 <h3 className="text-sm font-semibold text-foreground">Workspace Details</h3>
                 <div className="mt-4 space-y-4">
                   <div>
                     <label className="block text-xs font-medium text-muted">Workspace name</label>
-                    <input defaultValue="PulseOps Inc." className="mt-1 h-9 w-full rounded-md border border-border bg-surface px-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/30 transition-colors duration-150" />
+                    <input defaultValue="PulseOps Inc." className="mt-1 h-10 w-full rounded-xl border border-border bg-background px-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all duration-150" />
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-muted">Industry</label>
-                    <select className="mt-1 h-9 w-full rounded-md border border-border bg-surface px-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/30 transition-colors duration-150 cursor-pointer">
+                    <select className="mt-1 h-10 w-full rounded-xl border border-border bg-background px-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all duration-150 cursor-pointer">
                       <option>Technology</option>
                       <option>Finance</option>
                       <option>Healthcare</option>
@@ -109,7 +109,7 @@ export default function SettingsPage() {
                   </div>
                 </div>
               </div>
-              <div className="rounded-lg border border-border bg-card p-5">
+              <div className="rounded-2xl border border-border bg-card p-5">
                 <h3 className="text-sm font-semibold text-foreground">Danger Zone</h3>
                 <p className="mt-1 text-sm text-muted">Permanently delete this workspace and all associated data.</p>
                 <Button variant="danger" size="sm" className="mt-4">Delete workspace</Button>
@@ -124,7 +124,7 @@ export default function SettingsPage() {
           )}
 
           {activeTab === "Notifications" && (
-            <div className="rounded-lg border border-border bg-card p-5">
+            <div className="rounded-2xl border border-border bg-card p-5">
               <h3 className="text-sm font-semibold text-foreground">Notification Preferences</h3>
               <div className="mt-4 space-y-4">
                 {[
@@ -153,24 +153,24 @@ export default function SettingsPage() {
 
           {activeTab === "Billing" && (
             <>
-              <div className="rounded-lg border border-border bg-card p-5">
+              <div className="rounded-2xl border border-border bg-card p-5">
                 <h3 className="text-sm font-semibold text-foreground">Current Plan</h3>
                 <div className="mt-3 flex items-center gap-4">
-                  <div className="rounded-md bg-accent/15 px-3 py-1.5 text-sm font-semibold text-accent border border-accent/20">Business</div>
+                  <div className="rounded-full bg-highlight px-3 py-1 text-sm font-semibold text-white">Business</div>
                   <p className="text-sm text-muted">$299/month · Renews Jan 1, 2026</p>
                 </div>
               </div>
-              <div className="rounded-lg border border-border bg-card p-5">
+              <div className="rounded-2xl border border-border bg-card p-5">
                 <h3 className="text-sm font-semibold text-foreground">Payment Method</h3>
                 <div className="mt-3 flex items-center gap-3">
-                  <div className="flex h-10 w-14 items-center justify-center rounded border border-border bg-surface text-xs font-medium text-muted font-mono">VISA</div>
+                  <div className="flex h-10 w-14 items-center justify-center rounded-xl border border-border bg-surface text-xs font-medium text-muted">VISA</div>
                   <div>
                     <p className="text-sm text-foreground">Visa ending in 4242</p>
-                    <p className="text-xs text-muted font-mono">Expires 12/2026</p>
+                    <p className="text-xs text-muted">Expires 12/2026</p>
                   </div>
                 </div>
               </div>
-              <div className="rounded-lg border border-border bg-card p-5">
+              <div className="rounded-2xl border border-border bg-card p-5">
                 <h3 className="text-sm font-semibold text-foreground">Billing History</h3>
                 <div className="mt-3 space-y-2">
                   {[
@@ -178,12 +178,12 @@ export default function SettingsPage() {
                     { date: "Nov 1, 2025", amount: "$299.00", status: "Paid" },
                     { date: "Oct 1, 2025", amount: "$299.00", status: "Paid" },
                   ].map((item) => (
-                    <div key={item.date} className="flex items-center justify-between rounded border border-border px-3 py-2 transition-colors duration-150 hover:border-border-light">
+                    <div key={item.date} className="flex items-center justify-between rounded-xl border border-border px-3 py-2 transition-colors duration-150 hover:border-border-light">
                       <div>
-                        <p className="text-sm text-foreground font-mono">{item.amount}</p>
+                        <p className="text-sm text-foreground">{item.amount}</p>
                         <p className="text-xs text-muted">{item.date}</p>
                       </div>
-                      <span className="rounded-full bg-success/10 px-2 py-0.5 text-xs font-medium text-success border border-success/20">{item.status}</span>
+                      <span className="rounded-full bg-success/10 px-2 py-0.5 text-xs font-medium text-success">{item.status}</span>
                     </div>
                   ))}
                 </div>
@@ -202,14 +202,14 @@ function Toggle({ defaultChecked = false }: { defaultChecked?: boolean }) {
     <button
       onClick={() => setOn(!on)}
       className={cn(
-        "relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full transition-colors duration-150",
+        "relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full transition-colors duration-150",
         on ? "bg-accent" : "bg-border"
       )}
     >
       <span
         className={cn(
-          "inline-block h-3.5 w-3.5 rounded-full bg-white transition-transform duration-150",
-          on ? "translate-x-[18px]" : "translate-x-[3px]"
+          "inline-block h-4 w-4 rounded-full bg-white shadow-sm transition-transform duration-150",
+          on ? "translate-x-6" : "translate-x-1"
         )}
       />
     </button>

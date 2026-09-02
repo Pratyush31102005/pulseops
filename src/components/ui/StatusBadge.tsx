@@ -3,14 +3,14 @@ import { cn } from "@/lib/utils";
 type BadgeVariant = "Active" | "Trial" | "Churned" | "Paused" | "Completed" | "Pending" | "Failed" | "Refunded";
 
 const variantStyles: Record<BadgeVariant, string> = {
-  Active: "bg-success/10 text-success border border-success/20",
-  Trial: "bg-accent/10 text-accent border border-accent/20",
-  Churned: "bg-error/10 text-error border border-error/20",
-  Paused: "bg-warning/10 text-warning border border-warning/20",
-  Completed: "bg-success/10 text-success border border-success/20",
-  Pending: "bg-warning/10 text-warning border border-warning/20",
-  Failed: "bg-error/10 text-error border border-error/20",
-  Refunded: "bg-muted/10 text-muted-foreground border border-muted/20",
+  Active: "bg-success/10 text-success",
+  Trial: "bg-accent/15 text-accent-hover",
+  Churned: "bg-error/10 text-error",
+  Paused: "bg-warning/15 text-accent-hover",
+  Completed: "bg-success/10 text-success",
+  Pending: "bg-warning/15 text-accent-hover",
+  Failed: "bg-error/10 text-error",
+  Refunded: "bg-muted/10 text-muted",
 };
 
 const dotColors: Record<BadgeVariant, string> = {
@@ -28,7 +28,7 @@ export function StatusBadge({ status }: { status: BadgeVariant }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium",
+        "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium",
         variantStyles[status]
       )}
     >

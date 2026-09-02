@@ -33,18 +33,18 @@ export default function TransactionsPage() {
   }, [search, statusFilter, methodFilter]);
 
   const summaryCards = [
-    { label: "Total Value", value: formatCurrency(transactionMetrics.totalValue), icon: CircleDollarSign, color: "text-accent", bg: "bg-accent/10" },
+    { label: "Total Value", value: formatCurrency(transactionMetrics.totalValue), icon: CircleDollarSign, color: "text-foreground", bg: "bg-surface" },
     { label: "Successful", value: formatCurrency(transactionMetrics.successful), icon: CheckCircle2, color: "text-success", bg: "bg-success/10" },
-    { label: "Refunds", value: formatCurrency(transactionMetrics.refunds), icon: RotateCcw, color: "text-warning", bg: "bg-warning/10" },
+    { label: "Refunds", value: formatCurrency(transactionMetrics.refunds), icon: RotateCcw, color: "text-accent", bg: "bg-accent/10" },
     { label: "Failed", value: formatCurrency(transactionMetrics.failed), icon: XCircle, color: "text-error", bg: "bg-error/10" },
   ];
 
   return (
     <DashboardShell>
       <ToastContainer />
-      <div className="mx-auto max-w-7xl">
+      <div>
         <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-          <h1 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">Transactions</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Transactions</h1>
           <p className="mt-1 text-sm text-muted">Monitor all payment activity across your platform.</p>
         </motion.div>
 
@@ -55,15 +55,15 @@ export default function TransactionsPage() {
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05 + i * 0.05 }}
-              className="rounded-lg border border-border bg-card p-4 transition-all duration-150 hover:border-border-light metric-glow"
+              className="rounded-2xl border border-border bg-card p-4 transition-all duration-150 hover:shadow-md"
             >
               <div className="flex items-center gap-2">
-                <div className={cn("flex h-7 w-7 items-center justify-center rounded-md", card.bg)}>
-                  <card.icon className={cn("h-3.5 w-3.5", card.color)} />
+                <div className={cn("flex h-8 w-8 items-center justify-center rounded-xl", card.bg)}>
+                  <card.icon className={cn("h-4 w-4", card.color)} />
                 </div>
                 <p className="text-xs font-medium uppercase tracking-wider text-muted">{card.label}</p>
               </div>
-              <p className="mt-2.5 text-xl font-bold text-foreground font-mono">{card.value}</p>
+              <p className="mt-3 text-xl font-bold text-foreground">{card.value}</p>
             </motion.div>
           ))}
         </div>
@@ -79,10 +79,10 @@ export default function TransactionsPage() {
           <FilterDropdown label="Method" options={methodFilters} value={methodFilter} onChange={setMethodFilter} />
         </motion.div>
 
-        <div className="mt-4 overflow-x-auto rounded-lg border border-border">
+        <div className="mt-4 overflow-x-auto rounded-2xl border border-border bg-card">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-border bg-card">
+              <tr className="border-b border-border">
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted">ID</th>
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted">Customer</th>
                 <th className="hidden px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted sm:table-cell">Amount</th>
@@ -101,11 +101,11 @@ export default function TransactionsPage() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -4 }}
                     transition={{ delay: idx * 0.02, duration: 0.2 }}
-                    className="border-b border-border row-highlight"
+                    className="border-b border-border last:border-0 transition-colors duration-150 hover:bg-surface"
                   >
-                    <td className="px-4 py-3 text-xs font-mono text-muted">{txn.id}</td>
+                    <td className="px-4 py-3 text-sm text-muted font-mono text-xs">{txn.id}</td>
                     <td className="px-4 py-3 text-sm text-foreground">{txn.customerName}</td>
-                    <td className="hidden px-4 py-3 text-sm font-medium text-foreground font-mono sm:table-cell">{formatCurrency(txn.amount)}</td>
+                    <td className="hidden px-4 py-3 text-sm font-medium text-foreground sm:table-cell">{formatCurrency(txn.amount)}</td>
                     <td className="hidden px-4 py-3 text-sm text-muted md:table-cell">{formatDate(txn.date)}</td>
                     <td className="hidden px-4 py-3 text-sm text-muted lg:table-cell">{txn.paymentMethod}</td>
                     <td className="px-4 py-3"><StatusBadge status={txn.status} /></td>

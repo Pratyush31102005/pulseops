@@ -41,7 +41,7 @@ export function ToastContainer() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-3 shadow-lg"
+            className="flex items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 shadow-lg"
           >
             {toast.type === "error" ? (
               <AlertCircle className="h-4 w-4 shrink-0 text-error" />

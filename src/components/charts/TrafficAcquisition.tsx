@@ -10,10 +10,10 @@ interface TrafficAcquisitionProps {
 }
 
 const sourceColors: Record<string, string> = {
-  "Organic Search": "#10B981",
-  "Direct": "#3B82F6",
-  "Referral": "#D97706",
-  "Paid": "#EF4444",
+  "Organic Search": "#4CAF50",
+  "Direct": "#D4A843",
+  "Referral": "#E8C840",
+  "Paid": "#2D2D2D",
 };
 
 export function TrafficAcquisition({ data }: TrafficAcquisitionProps) {
@@ -22,12 +22,12 @@ export function TrafficAcquisition({ data }: TrafficAcquisitionProps) {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4, duration: 0.3 }}
-      className="rounded-lg border border-border bg-card p-5"
+      className="rounded-2xl border border-border bg-card p-5"
     >
       <h3 className="text-sm font-semibold text-foreground">Traffic / Acquisition</h3>
       <div className="mt-4 space-y-3">
         {data.map((source, idx) => {
-          const color = sourceColors[source.source] || "#3B82F6";
+          const color = sourceColors[source.source] || "#D4A843";
           return (
             <motion.div
               key={source.source}
@@ -37,17 +37,17 @@ export function TrafficAcquisition({ data }: TrafficAcquisitionProps) {
               className="flex items-center justify-between"
             >
               <div className="flex items-center gap-3">
-                <span className="h-2 w-2 rounded-full" style={{ backgroundColor: color }} />
+                <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: color }} />
                 <div>
                   <p className="text-sm text-foreground">{source.source}</p>
-                  <p className="text-xs text-muted font-mono">{formatNumber(source.visitors)} visitors</p>
+                  <p className="text-xs text-muted">{formatNumber(source.visitors)} visitors</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-sm font-medium text-foreground font-mono">{source.percentage}%</span>
+                <span className="text-sm font-medium text-foreground">{source.percentage}%</span>
                 <span
                   className={cn(
-                    "flex items-center gap-0.5 text-xs font-mono",
+                    "flex items-center gap-0.5 text-xs",
                     source.change > 0 ? "text-success" : "text-error"
                   )}
                 >

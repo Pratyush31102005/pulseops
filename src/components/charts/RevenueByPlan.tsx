@@ -9,10 +9,10 @@ interface RevenueByPlanProps {
 }
 
 const planColors: Record<string, string> = {
-  Starter: "#3B82F6",
-  Pro: "#1E40AF",
-  Business: "#D97706",
-  Enterprise: "#F59E0B",
+  Starter: "#8A8070",
+  Pro: "#D4A843",
+  Business: "#2D2D2D",
+  Enterprise: "#4CAF50",
 };
 
 export function RevenueByPlan({ data }: RevenueByPlanProps) {
@@ -23,12 +23,12 @@ export function RevenueByPlan({ data }: RevenueByPlanProps) {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.35, duration: 0.3 }}
-      className="rounded-lg border border-border bg-card p-5"
+      className="rounded-2xl border border-border bg-card p-5"
     >
       <h3 className="text-sm font-semibold text-foreground">Revenue by Plan</h3>
       <div className="mt-4 space-y-4">
         {data.map((plan, idx) => {
-          const color = planColors[plan.plan] || "#3B82F6";
+          const color = planColors[plan.plan] || "#D4A843";
           return (
             <motion.div
               key={plan.plan}
@@ -38,13 +38,13 @@ export function RevenueByPlan({ data }: RevenueByPlanProps) {
             >
               <div className="flex items-center justify-between text-sm">
                 <div className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full" style={{ backgroundColor: color }} />
+                  <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: color }} />
                   <span className="text-foreground">{plan.plan}</span>
-                  <span className="text-xs text-muted font-mono">({formatNumber(plan.count)})</span>
+                  <span className="text-xs text-muted">({formatNumber(plan.count)})</span>
                 </div>
-                <span className="font-medium text-foreground font-mono">{formatCurrency(plan.revenue)}</span>
+                <span className="font-medium text-foreground">{formatCurrency(plan.revenue)}</span>
               </div>
-              <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-border">
+              <div className="mt-2 h-2 overflow-hidden rounded-full bg-surface">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${(plan.revenue / maxRevenue) * 100}%` }}

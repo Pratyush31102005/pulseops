@@ -18,10 +18,10 @@ export default function ReportsPage() {
   return (
     <DashboardShell>
       <ToastContainer />
-      <div className="mx-auto max-w-4xl">
+      <div>
         <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">Reports</h1>
+            <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Reports</h1>
             <p className="mt-1 text-sm text-muted">Generate and download detailed analytics reports.</p>
           </div>
           <Button onClick={() => showToast("Report generation started")}>
@@ -36,12 +36,12 @@ export default function ReportsPage() {
               initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05 + idx * 0.04 }}
-              className="group flex items-center justify-between rounded-lg border border-border bg-card p-4 transition-all duration-150 hover:border-border-light cursor-pointer"
+              className="group flex items-center justify-between rounded-2xl border border-border bg-card p-4 transition-all duration-150 hover:shadow-md cursor-pointer"
             >
               <div>
                 <h3 className="text-sm font-medium text-foreground">{report.name}</h3>
                 <p className="mt-0.5 text-xs text-muted">{report.description}</p>
-                <div className="mt-2 flex items-center gap-1.5 text-xs text-muted font-mono">
+                <div className="mt-2 flex items-center gap-1.5 text-xs text-muted">
                   <Calendar className="h-3 w-3" />
                   {report.lastGenerated}
                 </div>
