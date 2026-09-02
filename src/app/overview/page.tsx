@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { DashboardShell } from "@/components/layout/DashboardShell";
 import { ToastContainer } from "@/components/ui/Toast";
 import { MetricCard } from "@/components/ui/MetricCard";
@@ -19,7 +20,12 @@ export default function OverviewPage() {
     <DashboardShell>
       <ToastContainer />
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <motion.div
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"
+        >
           <div>
             <h1 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">
               Good morning, Alex
@@ -28,23 +34,23 @@ export default function OverviewPage() {
               Here&apos;s what&apos;s happening with your business today.
             </p>
           </div>
-          <div className="flex items-center gap-1 rounded-lg border border-border bg-card p-0.5">
+          <div className="flex items-center gap-0.5 rounded-lg border border-border bg-card p-0.5">
             {dateRanges.map((range) => (
               <button
                 key={range}
                 onClick={() => setActiveRange(range)}
                 className={cn(
-                  "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
+                  "rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-150 cursor-pointer",
                   activeRange === range
-                    ? "bg-accent text-white"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "bg-accent text-white shadow-sm"
+                    : "text-muted-foreground hover:text-foreground hover:bg-card-hover"
                 )}
               >
                 {range}
               </button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {metrics.map((metric, i) => (

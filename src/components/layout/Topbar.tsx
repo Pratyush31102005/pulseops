@@ -12,13 +12,13 @@ export function Topbar({ collapsed, onMobileMenuOpen }: TopbarProps) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-30 flex h-14 items-center border-b border-border bg-background/80 px-4 backdrop-blur-md transition-all duration-200 lg:px-6",
+        "sticky top-0 z-30 flex h-14 items-center border-b border-border bg-surface/80 px-4 backdrop-blur-md transition-all duration-200 lg:px-6",
         collapsed ? "lg:pl-[76px]" : "lg:pl-[236px]"
       )}
     >
       <button
         onClick={onMobileMenuOpen}
-        className="mr-3 rounded p-1.5 text-muted-foreground transition-colors hover:bg-card hover:text-foreground lg:hidden"
+        className="mr-3 rounded p-1.5 text-muted-foreground transition-colors duration-150 hover:bg-card hover:text-foreground lg:hidden cursor-pointer"
       >
         <Menu className="h-5 w-5" />
       </button>
@@ -29,17 +29,17 @@ export function Topbar({ collapsed, onMobileMenuOpen }: TopbarProps) {
           <input
             type="search"
             placeholder="Search..."
-            className="h-9 w-full rounded-md border border-border bg-card pl-9 pr-3 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/30"
+            className="h-9 w-full rounded-md border border-border bg-card pl-9 pr-3 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/30 transition-colors duration-150"
           />
         </div>
       </div>
 
       <div className="flex items-center gap-2">
-        <button className="relative rounded-md p-2 text-muted-foreground transition-colors hover:bg-card hover:text-foreground">
+        <button className="relative rounded-md p-2 text-muted-foreground transition-colors duration-150 hover:bg-card hover:text-foreground cursor-pointer">
           <Bell className="h-4 w-4" />
-          <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-error" />
+          <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-highlight" />
         </button>
-        <div className="ml-1 flex h-8 w-8 items-center justify-center rounded-full bg-accent/10 text-xs font-semibold text-accent lg:hidden">
+        <div className="ml-1 flex h-8 w-8 items-center justify-center rounded-full bg-primary/20 text-xs font-semibold text-primary-light lg:hidden cursor-pointer">
           AM
         </div>
       </div>

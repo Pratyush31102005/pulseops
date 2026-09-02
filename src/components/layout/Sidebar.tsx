@@ -14,6 +14,7 @@ import {
   ChevronLeft,
   ChevronRight,
   LogOut,
+  Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { currentUser } from "@/lib/data";
@@ -41,11 +42,18 @@ export function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }: Side
     <div className="flex h-full flex-col">
       <div className={cn("flex h-14 items-center border-b border-border px-4", collapsed && "justify-center px-0")}>
         {collapsed ? (
-          <span className="text-lg font-bold text-accent">P</span>
+          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-accent">
+            <Zap className="h-4 w-4 text-white" />
+          </div>
         ) : (
-          <span className="text-base font-bold tracking-tight text-foreground">
-            Pulse<span className="text-accent">Ops</span>
-          </span>
+          <div className="flex items-center gap-2">
+            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-accent">
+              <Zap className="h-4 w-4 text-white" />
+            </div>
+            <span className="text-base font-bold tracking-tight text-foreground">
+              Pulse<span className="text-accent">Ops</span>
+            </span>
+          </div>
         )}
       </div>
 
@@ -58,11 +66,11 @@ export function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }: Side
               href={item.href}
               onClick={onMobileClose}
               className={cn(
-                "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-all duration-150 cursor-pointer",
                 isActive
-                  ? "bg-accent/10 text-accent"
-                  : "text-muted-foreground hover:bg-card hover:text-foreground",
-                collapsed && "justify-center px-2"
+                  ? "bg-accent/15 text-accent border-l-2 border-accent"
+                  : "text-muted-foreground hover:bg-card hover:text-foreground hover:border-l-2 hover:border-transparent",
+                collapsed && "justify-center px-2 border-l-0"
               )}
             >
               <item.icon className="h-4 w-4 shrink-0" />
@@ -74,7 +82,7 @@ export function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }: Side
 
       <div className="border-t border-border p-3">
         <div className={cn("flex items-center gap-3", collapsed && "justify-center")}>
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/10 text-xs font-semibold text-accent">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/20 text-xs font-semibold text-primary-light">
             {currentUser.avatar}
           </div>
           {!collapsed && (
@@ -84,7 +92,7 @@ export function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }: Side
             </div>
           )}
           {!collapsed && (
-            <button className="rounded p-1 text-muted transition-colors hover:text-foreground">
+            <button className="rounded p-1 text-muted transition-colors duration-150 hover:text-foreground cursor-pointer">
               <LogOut className="h-4 w-4" />
             </button>
           )}
@@ -104,7 +112,7 @@ export function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }: Side
         {sidebarContent}
         <button
           onClick={onToggle}
-          className="absolute -right-3 top-6 z-50 flex h-6 w-6 items-center justify-center rounded-full border border-border bg-surface text-muted transition-colors hover:text-foreground"
+          className="absolute -right-3 top-6 z-50 flex h-6 w-6 items-center justify-center rounded-full border border-border bg-surface text-muted transition-colors duration-150 hover:text-foreground hover:border-accent cursor-pointer"
         >
           {collapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronLeft className="h-3 w-3" />}
         </button>
@@ -117,6 +125,7 @@ export function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }: Side
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
               className="fixed inset-0 z-40 bg-black/60 lg:hidden"
               onClick={onMobileClose}
             />

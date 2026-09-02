@@ -5,7 +5,6 @@ import { FileText, Download, Calendar } from "lucide-react";
 import { DashboardShell } from "@/components/layout/DashboardShell";
 import { ToastContainer, showToast } from "@/components/ui/Toast";
 import { Button } from "@/components/ui/Button";
-import { EmptyState } from "@/components/ui/EmptyState";
 
 const reportTemplates = [
   { name: "Monthly Revenue Summary", description: "Comprehensive breakdown of monthly revenue by plan and region.", lastGenerated: "Dec 1, 2025" },
@@ -20,7 +19,7 @@ export default function ReportsPage() {
     <DashboardShell>
       <ToastContainer />
       <div className="mx-auto max-w-4xl">
-        <div className="flex items-center justify-between">
+        <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">Reports</h1>
             <p className="mt-1 text-sm text-muted">Generate and download detailed analytics reports.</p>
@@ -28,23 +27,23 @@ export default function ReportsPage() {
           <Button onClick={() => showToast("Report generation started")}>
             <FileText className="h-4 w-4" /> New Report
           </Button>
-        </div>
+        </motion.div>
 
         <div className="mt-6 space-y-3">
           {reportTemplates.map((report, idx) => (
             <motion.div
               key={report.name}
-              initial={{ opacity: 0, y: 6 }}
+              initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.05 }}
-              className="group flex items-center justify-between rounded-lg border border-border bg-card p-4 transition-colors hover:border-border-light"
+              transition={{ delay: 0.05 + idx * 0.04 }}
+              className="group flex items-center justify-between rounded-lg border border-border bg-card p-4 transition-all duration-150 hover:border-border-light cursor-pointer"
             >
               <div>
                 <h3 className="text-sm font-medium text-foreground">{report.name}</h3>
                 <p className="mt-0.5 text-xs text-muted">{report.description}</p>
-                <div className="mt-2 flex items-center gap-1.5 text-xs text-muted">
+                <div className="mt-2 flex items-center gap-1.5 text-xs text-muted font-mono">
                   <Calendar className="h-3 w-3" />
-                  Last generated: {report.lastGenerated}
+                  {report.lastGenerated}
                 </div>
               </div>
               <Button variant="ghost" size="sm" onClick={() => showToast("Download started")}>

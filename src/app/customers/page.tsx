@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { motion } from "framer-motion";
-import { MoreHorizontal, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MoreHorizontal, ChevronLeft, ChevronRight, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
 import { DashboardShell } from "@/components/layout/DashboardShell";
 import { ToastContainer } from "@/components/ui/Toast";
 import { SearchInput } from "@/components/ui/SearchInput";
@@ -59,6 +59,11 @@ export default function CustomersPage() {
     else { setSortField(field); setSortDir("asc"); }
   }
 
+  function SortIcon({ field }: { field: string }) {
+    if (sortField !== field) return <ArrowUpDown className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />;
+    return sortDir === "asc" ? <ArrowUp className="h-3 w-3 text-accent" /> : <ArrowDown className="h-3 w-3 text-accent" />;
+  }
+
   function openDrawer(c: Customer) {
     setSelectedCustomer(c);
     setDrawerOpen(true);
@@ -69,23 +74,28 @@ export default function CustomersPage() {
     <DashboardShell>
       <ToastContainer />
       <div className="mx-auto max-w-7xl">
-        <div>
+        <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
           <h1 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">Customers</h1>
           <p className="mt-1 text-sm text-muted">Manage your customer base and subscriptions.</p>
-        </div>
+        </motion.div>
 
-        <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.25 }}
+          className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center"
+        >
           <SearchInput value={search} onChange={setSearch} placeholder="Search customers..." className="w-full sm:w-64" />
-          <FilterDropdown label="Plan" options={plans} value={planFilter} onChange={setPlanFilter} />
-          <FilterDropdown label="Status" options={statuses} value={statusFilter} onChange={setStatusFilter} />
-        </div>
+          <FilterDropdown label="Plan" options={plans} value={planFilter} onChange={(v) => { setPlanFilter(v); setPage(1); }} />
+          <FilterDropdown label="Status" options={statuses} value={statusFilter} onChange={(v) => { setStatusFilter(v); setPage(1); }} />
+        </motion.div>
 
         {filtered.length === 0 ? (
           <EmptyState
             title="No customers found"
             description="Try adjusting your search or filters to find what you're looking for."
             actionLabel="Clear filters"
-            onAction={() => { setSearch(""); setPlanFilter("All"); setStatusFilter("All"); }}
+            onAction={() => { setSearch(""); setPlanFilter("All"); setStatusFilter("All"); setPage(1); }}
           />
         ) : (
           <>
@@ -93,79 +103,83 @@ export default function CustomersPage() {
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-border bg-card">
-                    <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted cursor-pointer hover:text-foreground" onClick={() => handleSort("name")}>
-                      Customer {sortField === "name" && (sortDir === "asc" ? "↑" : "↓")}
+                    <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted group cursor-pointer hover:text-foreground transition-colors" onClick={() => handleSort("name")}>
+                      <span className="flex items-center gap-1.5">Customer <SortIcon field="name" /></span>
                     </th>
                     <th className="hidden px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted md:table-cell">Email</th>
                     <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted">Plan</th>
                     <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted">Status</th>
-                    <th className="hidden px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted cursor-pointer hover:text-foreground sm:table-cell" onClick={() => handleSort("mrr")}>
-                      MRR {sortField === "mrr" && (sortDir === "asc" ? "↑" : "↓")}
+                    <th className="hidden px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted cursor-pointer hover:text-foreground transition-colors sm:table-cell group" onClick={() => handleSort("mrr")}>
+                      <span className="flex items-center gap-1.5">MRR <SortIcon field="mrr" /></span>
                     </th>
-                    <th className="hidden px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted lg:table-cell" onClick={() => handleSort("joined")}>
-                      Joined {sortField === "joined" && (sortDir === "asc" ? "↑" : "↓")}
+                    <th className="hidden px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted cursor-pointer hover:text-foreground transition-colors lg:table-cell group" onClick={() => handleSort("joined")}>
+                      <span className="flex items-center gap-1.5">Joined <SortIcon field="joined" /></span>
                     </th>
                     <th className="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider text-muted">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {paged.map((customer, idx) => (
-                    <motion.tr
-                      key={customer.id}
-                      initial={{ opacity: 0, y: 4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: idx * 0.03 }}
-                      className="border-b border-border transition-colors hover:bg-card cursor-pointer"
-                      onClick={() => openDrawer(customer)}
-                    >
-                      <td className="px-4 py-3">
-                        <div className="flex items-center gap-3">
-                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/10 text-xs font-semibold text-accent">
-                            {customer.avatar}
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-foreground">{customer.name}</p>
-                            <p className="text-xs text-muted md:hidden">{customer.email}</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="hidden px-4 py-3 text-sm text-muted md:table-cell">{customer.email}</td>
-                      <td className="px-4 py-3 text-sm text-foreground">{customer.plan}</td>
-                      <td className="px-4 py-3"><StatusBadge status={customer.status} /></td>
-                      <td className="hidden px-4 py-3 text-sm font-medium text-foreground sm:table-cell">{customer.mrr > 0 ? formatCurrency(customer.mrr) : "—"}</td>
-                      <td className="hidden px-4 py-3 text-sm text-muted lg:table-cell">{formatDate(customer.joined)}</td>
-                      <td className="px-4 py-3 text-right">
-                        <div className="relative inline-block">
-                          <button
-                            onClick={(e) => { e.stopPropagation(); setMenuOpen(menuOpen === customer.id ? null : customer.id); }}
-                            className="rounded p-1 text-muted transition-colors hover:bg-card-hover hover:text-foreground"
-                          >
-                            <MoreHorizontal className="h-4 w-4" />
-                          </button>
-                          {menuOpen === customer.id && (
-                            <div className="absolute right-0 top-full z-20 mt-1 w-36 rounded-md border border-border bg-card py-1 shadow-lg">
-                              <button onClick={(e) => { e.stopPropagation(); openDrawer(customer); }} className="w-full px-3 py-1.5 text-left text-sm text-foreground hover:bg-card-hover">View details</button>
-                              <button onClick={(e) => { e.stopPropagation(); setMenuOpen(null); showToast("Customer edited"); }} className="w-full px-3 py-1.5 text-left text-sm text-foreground hover:bg-card-hover">Edit</button>
-                              <button onClick={(e) => { e.stopPropagation(); setDeleteModal(customer); setMenuOpen(null); }} className="w-full px-3 py-1.5 text-left text-sm text-error hover:bg-card-hover">Remove</button>
+                  <AnimatePresence mode="popLayout">
+                    {paged.map((customer, idx) => (
+                      <motion.tr
+                        key={customer.id}
+                        layout
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        transition={{ delay: idx * 0.025, duration: 0.2 }}
+                        className="border-b border-border row-highlight cursor-pointer"
+                        onClick={() => openDrawer(customer)}
+                      >
+                        <td className="px-4 py-3">
+                          <div className="flex items-center gap-3">
+                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary-light">
+                              {customer.avatar}
                             </div>
-                          )}
-                        </div>
-                      </td>
-                    </motion.tr>
-                  ))}
+                            <div>
+                              <p className="text-sm font-medium text-foreground">{customer.name}</p>
+                              <p className="text-xs text-muted md:hidden">{customer.email}</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="hidden px-4 py-3 text-sm text-muted md:table-cell font-mono text-xs">{customer.email}</td>
+                        <td className="px-4 py-3 text-sm text-foreground">{customer.plan}</td>
+                        <td className="px-4 py-3"><StatusBadge status={customer.status} /></td>
+                        <td className="hidden px-4 py-3 text-sm font-medium text-foreground font-mono sm:table-cell">{customer.mrr > 0 ? formatCurrency(customer.mrr) : "—"}</td>
+                        <td className="hidden px-4 py-3 text-sm text-muted lg:table-cell">{formatDate(customer.joined)}</td>
+                        <td className="px-4 py-3 text-right">
+                          <div className="relative inline-block">
+                            <button
+                              onClick={(e) => { e.stopPropagation(); setMenuOpen(menuOpen === customer.id ? null : customer.id); }}
+                              className="rounded p-1 text-muted transition-colors duration-150 hover:bg-card-hover hover:text-foreground cursor-pointer"
+                            >
+                              <MoreHorizontal className="h-4 w-4" />
+                            </button>
+                            {menuOpen === customer.id && (
+                              <div className="absolute right-0 top-full z-20 mt-1 w-36 rounded-md border border-border bg-card py-1 shadow-lg">
+                                <button onClick={(e) => { e.stopPropagation(); openDrawer(customer); }} className="w-full px-3 py-1.5 text-left text-sm text-foreground hover:bg-card-hover transition-colors cursor-pointer">View details</button>
+                                <button onClick={(e) => { e.stopPropagation(); setMenuOpen(null); showToast("Customer edited"); }} className="w-full px-3 py-1.5 text-left text-sm text-foreground hover:bg-card-hover transition-colors cursor-pointer">Edit</button>
+                                <button onClick={(e) => { e.stopPropagation(); setDeleteModal(customer); setMenuOpen(null); }} className="w-full px-3 py-1.5 text-left text-sm text-error hover:bg-card-hover transition-colors cursor-pointer">Remove</button>
+                              </div>
+                            )}
+                          </div>
+                        </td>
+                      </motion.tr>
+                    ))}
+                  </AnimatePresence>
                 </tbody>
               </table>
             </div>
 
             <div className="mt-4 flex items-center justify-between">
-              <p className="text-sm text-muted">
-                Showing {(page - 1) * ITEMS_PER_PAGE + 1}–{Math.min(page * ITEMS_PER_PAGE, filtered.length)} of {filtered.length}
+              <p className="text-sm text-muted font-mono text-xs">
+                {(page - 1) * ITEMS_PER_PAGE + 1}–{Math.min(page * ITEMS_PER_PAGE, filtered.length)} of {filtered.length}
               </p>
               <div className="flex items-center gap-2">
                 <Button variant="secondary" size="sm" disabled={page <= 1} onClick={() => setPage(page - 1)}>
                   <ChevronLeft className="h-3.5 w-3.5" />
                 </Button>
-                <span className="text-sm text-muted">{page} / {totalPages}</span>
+                <span className="text-sm text-muted font-mono text-xs">{page} / {totalPages}</span>
                 <Button variant="secondary" size="sm" disabled={page >= totalPages} onClick={() => setPage(page + 1)}>
                   <ChevronRight className="h-3.5 w-3.5" />
                 </Button>

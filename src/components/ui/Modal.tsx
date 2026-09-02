@@ -38,13 +38,14 @@ export function Modal({ open, onClose, title, description, children }: ModalProp
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
             className="absolute inset-0 bg-black/60"
             onClick={onClose}
           />
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.95, y: 8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 8 }}
             transition={{ duration: 0.15 }}
             className="relative w-full max-w-md rounded-lg border border-border bg-card p-6 shadow-xl"
           >
@@ -53,7 +54,7 @@ export function Modal({ open, onClose, title, description, children }: ModalProp
                 <h2 className="text-base font-semibold text-foreground">{title}</h2>
                 {description && <p className="mt-1 text-sm text-muted">{description}</p>}
               </div>
-              <button onClick={onClose} className="rounded p-1 text-muted transition-colors hover:text-foreground">
+              <button onClick={onClose} className="rounded p-1 text-muted transition-colors duration-150 hover:text-foreground cursor-pointer">
                 <X className="h-4 w-4" />
               </button>
             </div>
